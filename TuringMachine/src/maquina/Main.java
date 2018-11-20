@@ -504,28 +504,20 @@ public class Main extends javax.swing.JFrame {
 
                         for(int j=0;j<estadosfinais.length;j++){
                         
-                        JOptionPane.showMessageDialog(null, "estado atual" + estadoatual+"\n"+ "estados finais:" + estadosfinais[j]);
-                        if(f.getProxEst().equals(estadosfinais[j])){
-                            
-                            txtFitaSaida.setText(fita_saida);
-                            finalizamaquina = true;
-                            break;            
-                            
-                        }else{
-                            estadoatual=f.getProxEst();
-                        }
-                        
-//                        if(estadoatual.equals(estados[(estados.length)-1])){
-//                             resultado="";
-//                             break;
-//                        }
-                        
+                            JOptionPane.showMessageDialog(null, "estado atual" + estadoatual+"\n"+ "estados finais:" + estadosfinais[j]);
+                            if(f.getProxEst().equals(estadosfinais[j])){                           
+                                txtFitaSaida.setText(fita_saida);
+                                finalizamaquina = true;
+                                break;                                      
+                            }else{
+                                estadoatual=f.getProxEst();
+                            }                                              
                         }
                         
                         if("R".equals(f.getMovFita())){ //se fita for pra direita
                            k++;
                            //charatual = string_fita_entrada.charAt(k);
-                        } else if("L".equals(f.getMovFita())){ //se fita for pra esquerda
+                        }else if("L".equals(f.getMovFita())){ //se fita for pra esquerda
                            k--;
                            //charatual = string_fita_entrada.charAt(k);
                         }// else if("S".equals(f.getMovFita())){ 
@@ -533,75 +525,9 @@ public class Main extends javax.swing.JFrame {
                         //}
                         charatual = string_fita_entrada.charAt(k);
                     }
-//                    for(int j=0;j<estadosfinais.length;j++){
-//                        
-//                        JOptionPane.showMessageDialog(null, "estado atual" + estadoatual+"\n"+ "estados finais:" + estadosfinais[j]);
-//                        if(estadoatual.equals(estadosfinais[j])){
-//                            
-//                            txtFitaSaida.setText(fita_saida);
-//                            finalizamaquina = true;
-//                            //break;            
-//                            
-//                        }else{
-//                            estadoatual=f.getProxEst();
-//                        }
-//                        
-////                        if(estadoatual.equals(estados[(estados.length)-1])){
-////                             resultado="";
-////                             break;
-////                        }
-//                        
-//                        }
-//                            if (resultado.equals("")){
-//                                
-//                            resultado="Inválida";
-//                            }
-//                            else{
-//                                txtFitaSaida.setText(fita_saida);
-//                        }
-                     
-                     
-                     
-                     //finalizamaquina = true; 
                 }
             }
         }
-        
-//        else{
-//                       fita_saida = fita_saida + f.getEscSimb();
-//                       txtFitaSaida.setText(fita_saida);
-//                   }
-        
-        //String text = String.valueOf(fita_entrada);
-
-        //txtFitaSaida.setText(text);
-        
-//        String estado_atual = estados[0];
-//        for (Func f : funcs){
-//           if(estado_atual.equals(f.getEstAtual())){
-//               //txtFitaSaida.setText("UHUL");
-//               for (int k = 0; k <= alfabeto_fita.length; k++) {
-//                        if(alfabeto_fita[k].equals(f.getLeSimb())){
-//                            estado_atual = f.getProxEst();
-//                        }
-//                    }
-//           } 
-//        }
-        
-        
-//        for (int j = 0; j <= estados.length; j++) {
-//            
-//            for (Func f : funcs) {
-//                if (estados[j].equals(f.getEstAtual())) {
-//                    //txtFitaSaida.setText("UHUL");
-//                    for (int k = 0; k <= alfabeto_fita.length; k++) {
-//                        if(alfabeto_fita[k].equals(f.getLeSimb())){
-//                            estado_atual = f.getProxEst();
-//                        }
-//                    }
-//                }
-//            }
-//        }
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
