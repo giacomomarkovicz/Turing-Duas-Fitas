@@ -480,9 +480,7 @@ public class Main extends javax.swing.JFrame {
         int k = 0;
         Boolean finalizamaquina = false;
         
-        string_fita_entrada = txtFitaEntrada.getText();
-        
-        //fita_entrada = string_fita_entrada.toCharArray();
+        string_fita_entrada = txtFitaEntrada.getText();      
         
         char charatual = string_fita_entrada.charAt(k);
         
