@@ -19,6 +19,7 @@ public class Main extends javax.swing.JFrame {
     String [] estadosfinais;
     
     String estado_inicial;
+    String estado_inicial2;
     
     String string_alfabeto;
     String [] alfabeto;
@@ -29,6 +30,10 @@ public class Main extends javax.swing.JFrame {
     String fita_saida = "";
     char[] fita_entrada = null;
     String string_fita_entrada;
+    
+    String fita_saida2 = "";
+    char[] fita_entrada2 = null;
+    String string_fita_entrada2;
     
     ArrayList<Func> funcs = new ArrayList();
   
@@ -100,7 +105,7 @@ public class Main extends javax.swing.JFrame {
         jLabel1.setText("Conjunto de Estados ");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 130, 20));
 
-        txtconjuntoEstados.setText("q1;q2;q3;q4");
+        txtconjuntoEstados.setText("q0;q1;q2");
         txtconjuntoEstados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtconjuntoEstadosActionPerformed(evt);
@@ -120,14 +125,19 @@ public class Main extends javax.swing.JFrame {
         jLabel2.setText("Alfabeto de Entrada");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 130, 20));
 
-        txtAlfabeto.setText("a;b;c");
+        txtAlfabeto.setText("1;2;0;*;o;g;l");
+        txtAlfabeto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAlfabetoActionPerformed(evt);
+            }
+        });
         getContentPane().add(txtAlfabeto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 90, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("Estados Finais");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 130, 20));
 
-        txtEstadosFinais.setText("q4");
+        txtEstadosFinais.setText("q2");
         getContentPane().add(txtEstadosFinais, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 90, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -326,7 +336,7 @@ public class Main extends javax.swing.JFrame {
         jLabel18.setText("Q0");
         getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 30, 20));
 
-        txtEstadoIn.setText("q1");
+        txtEstadoIn.setText("q0");
         getContentPane().add(txtEstadoIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 90, -1));
 
         txtMostraEstadoIn.setEditable(false);
@@ -522,18 +532,20 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_txtFitaEntradaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String estadoatual;
+        String estadoatual;       
         int k = 0;
+        int l = 0;
         Boolean finalizamaquina = false;
         
         string_fita_entrada = txtFitaEntrada.getText();
+        string_fita_entrada2 = txtFitaEntrada2.getText();
         
         //fita_entrada = string_fita_entrada.toCharArray();
         
         char charatual = string_fita_entrada.charAt(k);
+        char charatual2 = string_fita_entrada2.charAt(l);
         
-        estadoatual = estado_inicial;
-             
+        estadoatual = estado_inicial;            
 
         while (finalizamaquina == false) {
             for (Func f : funcs ){
@@ -545,19 +557,30 @@ public class Main extends javax.swing.JFrame {
                     
                  JOptionPane.showMessageDialog(null, "char atual" + String.valueOf(charatual)+"\n"+ "estados f.getlesymbol:" + f.getLeSimb());
                 
-                    if(String.valueOf(charatual).equals(f.getLeSimb())){ //compara caracter atual da fita com os caracteres das funções de transição
+                    if(String.valueOf(charatual).equals(f.getLeSimb())&& String.valueOf(charatual2).equals(f.getLeSimb2())){ //compara caracter atual da fita com os caracteres das funções de transição
                         fita_saida=fita_saida + f.getEscSimb();
+                        fita_saida2=fita_saida2 + f.getEscSimb2();
+                        
 
                         for(int j=0;j<estadosfinais.length;j++){
                         
                             JOptionPane.showMessageDialog(null, "estado atual" + estadoatual+"\n"+ "estados finais:" + estadosfinais[j]);
                             if(f.getProxEst().equals(estadosfinais[j])){                           
                                 txtFitaSaida.setText(fita_saida);
+                                txtFitaSaida2.setText(fita_saida2);
                                 finalizamaquina = true;
                                 break;                                      
                             }else{
                                 estadoatual=f.getProxEst();
                             }                                              
+                        }
+                        
+                        if("R".equals(f.getMovFita2())){ //se fita for pra direita
+                           l++;
+                           //charatual = string_fita_entrada.charAt(k);
+                        }else if("L".equals(f.getMovFita2())){ //se fita for pra esquerda
+                           l--;
+                           //charatual = string_fita_entrada.charAt(k);
                         }
                         
                         if("R".equals(f.getMovFita())){ //se fita for pra direita
@@ -570,6 +593,7 @@ public class Main extends javax.swing.JFrame {
                            //charatual = string_fita_entrada.charAt(k);
                         //}
                         charatual = string_fita_entrada.charAt(k);
+                        charatual2 = string_fita_entrada2.charAt(l);
                     }
                 }
             }
@@ -596,6 +620,10 @@ public class Main extends javax.swing.JFrame {
     private void txtFitaEntrada2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFitaEntrada2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFitaEntrada2ActionPerformed
+
+    private void txtAlfabetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAlfabetoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAlfabetoActionPerformed
 
     public static void main(String args[]) {
         
